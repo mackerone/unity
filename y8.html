@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="y8">
+<script src="http://img-ak.y8.com/assets/y8-b0a054ac8e500a0394f1f1b11123e69b.js"></script>
+  <script type="text/javascript">
+    var unityObjectUrl = "http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js";
+    if (document.location.protocol == 'https:')
+      unityObjectUrl = unityObjectUrl.replace("http://", "https://ssl-");
+    document.write('<script type="text\/javascript" src="' + unityObjectUrl + '"><\/script>');
+  </script>
+  <script type="text/javascript">
+      var config = {
+        width: 800,
+        height: 600,
+        params: { enableDebugging:"0" }
+      };
+      config.params["disableContextMenu"] = true;
+      var u = new UnityObject2(config);
+
+      jQuery(function() {
+
+        var $missingScreen = jQuery("#unityPlayer").find(".missing");
+        var $brokenScreen = jQuery("#unityPlayer").find(".broken");
+        $missingScreen.hide();
+        $brokenScreen.hide();
+
+        u.observeProgress(function (progress) {
+          switch(progress.pluginStatus) {
+            case "broken":
+              $brokenScreen.find("a").click(function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                u.installPlugin();
+                return false;
+              });
+              $brokenScreen.show();
+            break;
+            case "missing":
+              $missingScreen.find("a").click(function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                u.installPlugin();
+                return false;
+              });
+              $missingScreen.show();
+            break;
+            case "installed":
+              $missingScreen.remove();
+            break;
+            case "first":
+            break;
+          }
+        });
+        u.initPlugin(jQuery("#unityPlayer")[0], "http://bit.ly/1WrrYnX?1430246739");
+      });
+    </script>
+  <div class="clear"></div>
+    <div id="item-container" class="item-container">
+<div id="unityPlayer">
+  <div class="missing">
+    <div class="unity3d-alert">This game requires <a href="http://unity3d.com/webplayer" target="_blank"><img alt="Unity3d logo" src="http://img-ak.y8.com/assets/unity3d-logo-75099389a0afa98f20189e2e634c6644.png" /><b>UNITY 3D plugin</b></a> for high quality 3d graphics directly in your browser. It is 100% free and safe. <span>More information on <a href="http://en.wikipedia.org/wiki/Unity_(game_engine)" target="_blank">Wikipedia</a>.</span></div>
+    <div class="unity3d-alert chrome-42" style="display:none;">Chrome 42+ disables NPAPI plugins like <a href="http://unity3d.com/webplayer" target="_blank"><img alt="Unity3d logo" src="http://img-ak.y8.com/assets/unity3d-logo-75099389a0afa98f20189e2e634c6644.png" /><b>UNITY 3D plugin</b></a>: Try another browser like <a href="https://www.mozilla.org/firefox" target="_blank"><img alt="Firefox logo" src="http://img-ak.y8.com/assets/firefox-logo-d07ac83a8bb79a69a684f6fd1e70bd85.png" /><b>Firefox</b></a></div>
+    <ul class="unity3d-block">
+      <li><a href="http://unity3d.com/webplayer" title="Unity Web Player. Install now!" target="_blank"><img alt="Unity Web Player. Install now!" src="http://webplayer.unity3d.com/installation/getunity.png" width="193" height="63" /></a></li>
+      <li><div class="unity3d-sitelogo"></div></li>
+    </ul>
+  </div>
+  <div class="broken" style="display: none;">
+    <div class="unity3d-alert">This game requires <a href="http://unity3d.com/webplayer" target="_blank"><img alt="Unity3d logo" src="http://img-ak.y8.com/assets/unity3d-logo-75099389a0afa98f20189e2e634c6644.png" /><b>UNITY 3D plugin</b></a> for high quality 3d graphics directly in your browser. It is 100% free and safe. <span>More information on <a href="http://en.wikipedia.org/wiki/Unity_(game_engine)" target="_blank">Wikipedia</a>.</span></div>
+    <ul class="unity3d-block">
+      <li><a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now! Restart your browser after install."><img alt="Unity Web Player. Install now! Restart your browser after install." src="http://webplayer.unity3d.com/installation/getunityrestart.png" width="193" height="63" /></a></li>
+      <li><div class="unity3d-sitelogo"></div></li>
+    </ul>
+
+
+  </body>
+</html>
